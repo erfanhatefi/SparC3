@@ -24,7 +24,7 @@ This repository is currently under development. The code will be published soon.
 
 ## Abstract
 
-Large Language Models (LLMs) are central to many contemporary AI applications, yet their extensive parameter counts pose significant challenges for deployment in memory- and compute-constrained environments. Recent works in eXplainable AI (XAI), particularly on attribution methods, suggest that interpretability can also enable model compression by identifying and removing components irrelevant to inference. In this paper, we leverage Layer-wise Relevance Propagation (LRP) to perform attribution-guided pruning of LLMs. While LRP has shown promise in structured pruning for vision models, we extend it to unstructured pruning in LLMs and demonstrate that it can substantially reduce model size with minimal performance loss. Our method is especially effective in extracting task-relevant subgraphs -- so-called ``circuits'' -- which can represent core functions (e.g., indirect object identification). Building on this, we introduce a technique for model correction, by selectively removing circuits responsible for spurious behaviors (e.g., toxic outputs). All in all, we gather these techniques as a uniform holistic framework and showcase its effectiveness and limitations through extensive experiments for compression, circuit discovery and model correction on Llama and OPT models, highlighting its potential for improving both model efficiency and safety.
+Large Language Models (LLMs) are widely deployed in real-world applications, yet their internal mechanisms remain difficult to interpret and control, limiting our ability to diagnose and correct undesirable behaviors. Mechanistic interpretability addresses this challenge by identifying circuits - subsets of model components responsible for specific behaviors. However, discovering such circuits in LLMs remains difficult due to their scale and complexity. We frame circuit discovery as identifying parameters that contribute most to model outputs on task-specific inputs, and use Layer-wise Relevance Propagation (LRP) with reference samples to attribute and extract these components via pruning. Building on this, we introduce contrastive relevance to isolate circuits associated with undesired behaviors while preserving general capabilities, enabling targeted model correction. On OPT-125M, we show that pruning as little as ~0.3% of neurons substantially reduces toxic outputs, while pruning approximately 0.03% of weight elements mitigates repetitive text generation without degrading general performance. These results establish attribution-guided pruning as an effective mechanism for identifying and intervening on behavior-specific circuits in LLMs. We further validate our findings on additional small-scale language models, demonstrating that the proposed approach transfers across architectures.
 
 <div align="center">
   <img src="/docs/source/static/intro_story.png" width="1000"/>
@@ -37,9 +37,9 @@ Large Language Models (LLMs) are central to many contemporary AI applications, y
 If you find this work useful, please cite our paper:
 
 ```bibtex
-@misc{hatefi2025attributionguidedpruningcompressioncircuit,
-      title={Attribution-guided Pruning for Compression, Circuit Discovery, and Targeted Correction in LLMs}, 
-      author={Sayed Mohammad Vakilzadeh Hatefi and Maximilian Dreyer and Reduan Achtibat and Patrick Kahardipraja and Thomas Wiegand and Wojciech Samek and Sebastian Lapuschkin},
+@misc{atefi2026attributionguidedpruninginsightcontrol,
+      title={Attribution-Guided Pruning for Insight and Control: Circuit Discovery and Targeted Correction in Small-scale LLMs}, 
+      author={Sayed Mohammad Vakilzadeh Hatefi and Maximilian Dreyer and Reduan Achtibat and Patrick Kahardipraja and Thomas Wiegand and Wojciech Samek and Alexander Binder and Sebastian Lapuschkin},
       year={2025},
       eprint={2506.13727},
       url={https://arxiv.org/abs/2506.13727}, 
